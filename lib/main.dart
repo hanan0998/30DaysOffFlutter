@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => HomePage(),
       },
       // specify which page should open initially
-      initialRoute: "/home",
+      initialRoute: "/",
     );
   }
 }
