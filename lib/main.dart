@@ -3,6 +3,7 @@ import 'package:pakistan/pages/login_page.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'utils/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // adding enter of homepage
         '/': (context) => LoginPage(),
-        "/home": (context) => HomePage(),
+        MyRoutes.homePage: (context) => HomePage(),
         // adding entry of loginpage
-        '/login': (context) => HomePage(),
+        MyRoutes.loginPage: (context) => LoginPage(),
       },
       // specify which page should open initially
       initialRoute: "/",
