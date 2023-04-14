@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.loginPage: (context) => LoginPage(),
       },
       // specify which page should open initially
-      initialRoute: "/",
+      initialRoute: MyRoutes.homePage,
     );
   }
 }
