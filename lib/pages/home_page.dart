@@ -8,7 +8,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cataloge"),
+        // backgroundColor: Colors.white,
+        // // to remove the elevation
+        // elevation: 0.0,
+        // // changing the color of the icon
+        // iconTheme: IconThemeData(color: Colors.black),
+        title: Text("Cataloge App "),
       ),
       body: Center(
         child: Container(

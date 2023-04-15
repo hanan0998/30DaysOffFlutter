@@ -4,6 +4,7 @@ import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'utils/routes.dart';
+import './widgets/theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,15 +18,11 @@ class MyApp extends StatelessWidget {
       // Appling dark theme to the app
       themeMode: ThemeMode.light,
       // this is themedata for dark theme
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      // MyTheme is the class we made in widgets/theme.dart
+      darkTheme: MyTheme.DarkTheme(context),
       // theme data for light theme
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        // for primary text only
-        primaryTextTheme: GoogleFonts.latoTextTheme(),
-        // for all text
-        fontFamily: GoogleFonts.lato().fontFamily,
-      ),
+      // MyTheme is the class we made in widgets/theme.dart
+      theme: MyTheme.LightTheme(context),
       // route takes map (dictionary)
 
       routes: {
