@@ -17,10 +17,12 @@ class Item {
 
 final products = [
   Item(
-      id: "Catalog001",
-      name: 'iPhone 12 Pro',
-      desc: "Apple iPhone 12 Generation",
-      price: 999,
-      color: "#33505a",
-      image: "Later ")
+    id: "Catalog001",
+    name: 'iPhone 12 Pro',
+    desc: "Apple iPhone 12 Generation",
+    price: 999,
+    color: "#33505a",
+    image:
+        "https://th.bing.com/th/id/OIP.A1nYWDImmAcffIZGpnpRXAHaEK?w=306&h=180&c=7&r=0&o=5&pid=1.7",
+  )
 ];
