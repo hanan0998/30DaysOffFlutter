@@ -7,7 +7,8 @@ class MyTheme {
         // for primary text only
         primaryTextTheme: GoogleFonts.latoTextTheme(),
         // for all text
-        fontFamily: GoogleFonts.lato().fontFamily,
+        // fontFamily: GoogleFonts.lato().fontFamily,
+        fontFamily: GoogleFonts.poppins().fontFamily,
         // adding app bar theme of the whole app
         appBarTheme: AppBarTheme(
           color: Colors.white,
@@ -23,4 +24,8 @@ class MyTheme {
   static ThemeData DarkTheme(BuildContext context) => ThemeData(
         brightness: Brightness.dark,
       );
+
+  //colors
+  static Color creamColor = Color(0xfff5f5f5);
+  static Color darkBlushColor = Color(0xff403b58);
 }

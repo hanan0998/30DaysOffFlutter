@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 // gives you to load json file into any dart file (Reffering to below Import)
 import 'package:flutter/services.dart';
+import 'package:pakistan/widgets/theme.dart';
 import '../widgets/drawer.dart';
 import '../models/catalog.dart';
 import '../widgets/itemWidgets.dart';
 // gives you json encoder and decoder to deal with json file (Reffering to below Import)
 import 'dart:convert';
+// codepur velocity_x package for responsive ui
+import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,58 +49,129 @@ class _HomePageState extends State<HomePage> {
     // );
     var items = CatalogModel.items.length;
     return Scaffold(
-        appBar: AppBar(
-          // backgroundColor: Colors.white,
-          // // to remove the elevation
-          // elevation: 0.0,
-          // // changing the color of the icon
-          // iconTheme: IconThemeData(color: Colors.black),
-          title: Text("Cataloge App "),
-        ),
-        drawer: MyDrawer(),
-        body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-                // now using gridview.builder rather than listview.builder
-                ? GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16.0),
-                    itemBuilder: ((context, index) {
-                      final item = CatalogModel.items[index];
-                      return Card(
-                        // important to rount all the gridtile
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        child: GridTile(
-                          child: Image.asset(item.image),
-                          header: Container(
-                            padding: const EdgeInsets.all(12),
-                            child: Text(
-                              item.name,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            decoration: BoxDecoration(color: Colors.deepPurple),
-                          ),
-                          footer: Container(
-                            padding: const EdgeInsets.all(12),
-                            child: Text(
-                              item.price.toString(),
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            decoration: BoxDecoration(color: Colors.black),
-                          ),
-                        ),
-                      );
-                    }),
-                    itemCount: items,
+        backgroundColor: MyTheme.creamColor,
+        body: SafeArea(
+          child: Container(
+            // Vx.m32 is edgeinsets.all(32)  => In Velocity_x
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CatalogHeader(),
+                // we can use if and else  statement in the widget
+                if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                  CatalogList().expand()
+                else
+                  Center(
+                    child: CircularProgressIndicator(),
                   )
-                : Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 100,
-                    ),
-                  )));
+              ],
+            ),
+          ),
+        ));
+  }
+}
+
+// making class for catalog app header
+class CatalogHeader extends StatelessWidget {
+  const CatalogHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // syntax in velocity_x
+        "Catalog App".text.xl5.bold.color(MyTheme.darkBlushColor).make(),
+        "Trending Products".text.xl2.make()
+      ],
+    );
+  }
+}
+
+class CatalogList extends StatelessWidget {
+  const CatalogList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // so that it can fit into the container
+      shrinkWrap: true,
+      itemCount: CatalogModel.items.length,
+      itemBuilder: (context, index) {
+        final catalog = CatalogModel.items[index];
+        return CatalogItem(catalog);
+      },
+    );
+  }
+}
+
+class CatalogItem extends StatelessWidget {
+  final Item _item;
+  const CatalogItem(this._item) : assert(_item != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return VxBox(
+        child: Row(
+      children: [
+        CatalogImage(_item.image),
+        Expanded(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // adding price and desc
+            _item.name.text.bold.xl.color(MyTheme.darkBlushColor).make(),
+            _item.desc.text.textStyle(context.captionStyle).make(),
+            // adding size box
+            SizedBox(
+              height: 10,
+            ),
+            // this is  buttonbar have button and to display buy button and price
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
+              buttonPadding: EdgeInsets.zero,
+              children: [
+                "\$${_item.price}".text.bold.xl.make(),
+                ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        //adding buton to color
+                        backgroundColor:
+                            MaterialStateProperty.all(MyTheme.darkBlushColor),
+                        // to change the shape of the button
+                        shape: MaterialStateProperty.all(StadiumBorder())),
+                    child: "Buy".text.make())
+              ],
+            ).pOnly(right: 8.0),
+          ],
+        ))
+      ],
+    )).white.rounded.square(150).make().py16();
+  }
+}
+
+class CatalogImage extends StatelessWidget {
+  const CatalogImage(@required this.image);
+
+  final image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(image)
+        // wrapping into the container
+        .box
+        // rounding the edge og the container
+        .rounded
+        // add padding of the image.asset box
+        .p8
+        .color(MyTheme.creamColor)
+        .make()
+        // padding inside the vxBox
+        .p16()
+        // making  width half of the screen
+        // .wHalf(context)
+        .w40(context);
   }
 }
