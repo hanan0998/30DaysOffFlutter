@@ -1,19 +1,50 @@
 import 'package:flutter/material.dart';
+// gives you to load json file into any dart file (Reffering to below Import)
+import 'package:flutter/services.dart';
 import '../widgets/drawer.dart';
 import '../models/catalog.dart';
 import '../widgets/itemWidgets.dart';
+// gives you json encoder and decoder to deal with json file (Reffering to below Import)
+import 'dart:convert';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    // for some testing purpose you may learn in future
+    await Future.delayed(Duration(seconds: 10));
+    final catalogjson =
+        await rootBundle.loadString('assets/files/catalog.json');
+    // print(catalogjson);
+    // jsondecoder convert string to maps or lists
+    final decodeData = jsonDecode(catalogjson);
+    // getting product key from the decodeData
+    var productData = decodeData['products'];
+    // getting of list of maps and store in CatalogModel.items as list
+    CatalogModel.items =
+        List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     // making a dummy list of the same item with index 0
-    final dummyList = List.generate(
-      05, // number of list
-      (index) => CatalogModel().items[0],
-    );
-    var items = dummyList.length;
+    // final dummyList = List.generate(
+    //   5, // number of list
+    //   (index) => CatalogModel().items[0],
+    // );
+    var items = CatalogModel.items.length;
     return Scaffold(
         appBar: AppBar(
           // backgroundColor: Colors.white,
@@ -25,15 +56,18 @@ class HomePage extends StatelessWidget {
         ),
         drawer: MyDrawer(),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
-            itemCount: items,
-            itemBuilder: (context, index) {
-              return ItemWidget(
-                item: dummyList[index],
-              );
-            },
-          ),
-        ));
+            padding: const EdgeInsets.all(16.0),
+            child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                ? ListView.builder(
+                    itemCount: items,
+                    itemBuilder: (context, index) => ItemWidget(
+                      item: CatalogModel.items[index],
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 100,
+                    ),
+                  )));
   }
 }
