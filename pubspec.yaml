@@ -37,6 +37,8 @@ dependencies:
   
   google_fonts: ^4.0.3
   cupertino_icons: ^1.0.5
+  # for better ui and statemanagement and having a lot of utilities
+  velocity_x: ^3.6.0
 
 dev_dependencies:
   flutter_test:

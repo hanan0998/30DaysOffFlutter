@@ -6,7 +6,7 @@
             "desc": "Apple iPhone 12 Generation",
             "price": 999,
             "color": "#33505a",
-            "image": "assets/images/iphone12.jpg"
+            "image": "assets/images/iphone12.png"
 
         },
         {
@@ -15,7 +15,7 @@
             "desc": "Google Pixel phone 5 generation",
             "price": 699,
             "color": "#00ac51",
-            "image": "assets/images/googlepixel5.jpg"
+            "image": "assets/images/googlepixel5.png"
         },
         {
             "id" : 3,
@@ -23,7 +23,7 @@
             "desc": "Apple Macbook Air with apple silicon",
             "price": 1099,
             "color": "#e0bfae",
-            "image": "assets/images/macbookair.jpg"
+            "image": "assets/images/macbookair.png"
         },
         {
             "id" : 4,
@@ -31,7 +31,7 @@
             "desc": "Sony PlayStation 5th generation",
             "price": 500,
             "color": "#544ee4",
-            "image": "assets/images/playstation.jpg"
+            "image": "assets/images/playstaion2.png"
         },
         {
             "id" : 5,
@@ -39,7 +39,7 @@
             "desc": "Apple Airpods 1st generation",
             "price": 200,
             "color": "#e3e4e9",
-            "image": "assets/images/airpods.jpg"
+            "image": "assets/images/airpods.png"
         },
         {
             "id" : 6,
@@ -47,7 +47,7 @@
             "desc": "Apple iPad pro 2020 edition",
             "price": 799,
             "color": "#f73984",
-            "image": "assets/images/ipad.jpg"
+            "image": "assets/images/ipad.png"
         },
         {
             "id" : 7,
@@ -55,7 +55,7 @@
             "desc": "Samsung Galaxy S21 Ultra",
             "price": 1299,
             "color": "#1c1c1c",
-            "image": "assets/images/samsungultra.jpg"
+            "image": "assets/images/samsungultra.png"
         },
         {
             "id" : 8,
@@ -63,7 +63,7 @@
             "desc": "Samsung Galaxy S21",
             "price": 899,
             "color": "#7c95eb",
-            "image": "assets/images/samsungultra.jpg"
+            "image": "assets/images/samsung21.png"
         }
     ]
     
